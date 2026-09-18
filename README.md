@@ -1,60 +1,62 @@
-# podaruj. — lista prezentowa
+# podaruj. — Gift Wishlist
 
-Pierwszy etap aplikacji do zbierania pomysłów na prezenty. Interfejs jest po polsku i działa na komputerze oraz telefonie.
+An early version of an app for collecting gift ideas. The interface is in Polish and works on desktop and mobile.
 
-## Uruchomienie
+## Getting started
 
 ```bash
 npm ci
 npm run dev
 ```
 
-Otwórz http://localhost:3000.
+Open [http://localhost:3000](http://localhost:3000).
 
-## Co działa
+## Features
 
-- Lista z sześcioma przykładowymi prezentami.
-- Dodawanie i edycja nazwy, opisu, kategorii, orientacyjnej ceny i linku do sklepu.
-- Wyróżnianie najbardziej chcianych prezentów.
-- Usuwanie z możliwością cofnięcia ostatniego usunięcia.
-- Wyszukiwanie, filtrowanie wyróżnionych oraz sortowanie po cenie.
-- Zapis w localStorage i synchronizacja między kartami tej samej przeglądarki.
-- Walidacja cen i linków HTTP/HTTPS, obsługa pustej listy i braku wyników.
-- Formularz w komponencie Dialog z shadcn/ui (Radix), z obsługą klawiatury, zamykaniem przez Escape i przywracaniem fokusu.
+- A wishlist with six sample gifts.
+- Add and edit a gift's name, description, category, estimated price, and shop link.
+- Highlight the gifts you want most.
+- Delete gifts and undo the most recent deletion.
+- Search, filter highlighted gifts, and sort by price.
+- Save to localStorage and synchronize changes across tabs in the same browser.
+- Validate prices and HTTP/HTTPS links, with empty states for an empty list or no search results.
+- Add and edit gifts in a shadcn/ui Dialog (Radix), with keyboard navigation, Escape to close, and focus restoration.
 
-## Zakres wersji demo
+## Demo scope
 
-To lokalna lista, bez kont użytkowników i backendu. Dane zostają w danej przeglądarce pod kluczem `podaruj.gifts.v1`; wyczyszczenie danych witryny usuwa własne wpisy. Gdy zapis jest zablokowany, aplikacja informuje, że zmiany są tymczasowe. Nazwy i ceny początkowych prezentów to przykłady, nie oferty sklepów.
+This is a local wishlist without user accounts or a backend. Data stays in the current browser under the `podaruj.gifts.v1` key; clearing site data removes your entries. If storage is unavailable, the app explains that changes are temporary. The initial gift names and prices are examples, not store offers.
 
-Kolejne etapy: baza danych i logowanie, prywatne grupy, udostępnianie list oraz rezerwacje niewidoczne dla właściciela listy.
+Planned features: a database and authentication, private groups, shared wishlists, and gift reservations hidden from the wishlist owner.
 
-## Struktura
+## Project structure
 
-- `app/page.tsx` — wejście strony jako Server Component.
-- `components/wishlist.tsx` — interaktywna lista i zarządzanie widokiem.
-- `components/wishlist-intro.tsx` — nagłówek listy i dekoracyjna ilustracja.
-- `components/gift-card.tsx` — karta prezentu i jej akcje.
-- `components/gift-form.tsx` — formularz dodawania i edycji.
-- `components/gift-artwork.tsx` — lokalne ilustracje SVG kategorii.
-- `components/ui/` — komponenty shadcn/ui: Button, Input, Textarea, Label, Checkbox, NativeSelect, Dialog, Card i Badge.
-- `components.json` — konfiguracja shadcn/ui (Radix, preset Nova).
-- `app/globals.css` — tokeny motywu i podstawowe style globalne. Układ i responsywność korzystają z klas Tailwind bez osobnych klas CSS dla widoków.
-- `lib/gifts.ts` — typy, dane przykładowe i walidacja.
-- `lib/gift-store.ts` — lokalny magazyn danych z `useSyncExternalStore`; dane z przeglądarki są odczytywane po hydratacji.
+- `app/page.tsx` — page entry point as a Server Component.
+- `components/wishlist.tsx` — interactive wishlist and view state.
+- `components/wishlist-intro.tsx` — wishlist heading and decorative illustration.
+- `components/gift-card.tsx` — gift card and its actions.
+- `components/gift-form.tsx` — form for adding and editing gifts.
+- `components/gift-artwork.tsx` — local SVG illustrations for gift categories.
+- `components/ui/` — shadcn/ui components: Button, Input, Textarea, Label, Checkbox, NativeSelect, Dialog, Card, and Badge.
+- `components.json` — shadcn/ui configuration (Radix, Nova preset).
+- `app/globals.css` — theme tokens and global base styles. Layout and responsive styling use Tailwind utilities without separate CSS classes for views.
+- `lib/gifts.ts` — types, sample data, and validation.
+- `lib/gift-store.ts` — local data store using `useSyncExternalStore`; browser data is read after hydration.
 
-## Kontrola jakości
+## Quality checks
 
 ```bash
 npm run lint
 npm run build
 ```
 
-Next.js 16, React 19, TypeScript, Tailwind CSS 4 i [shadcn/ui](https://ui.shadcn.com/docs/installation/next). Komponenty UI są częścią repozytorium i można je dostosowywać. Wspólne kolory znajdują się w `app/globals.css`, a warianty przycisków w `components/ui/button.tsx`.
+## Tech stack
 
-Kolejne komponenty dodajemy przez lokalną wersję CLI:
+Next.js 16, React 19, TypeScript, Tailwind CSS 4, and [shadcn/ui](https://ui.shadcn.com/docs/installation/next). UI components live in the repository and can be customized. Shared colors are defined in `app/globals.css`, and button variants in `components/ui/button.tsx`.
+
+Add more components using the locally installed CLI:
 
 ```bash
 npx shadcn add separator
 ```
 
-Projekt nie wymaga kluczy API ani zmiennych środowiskowych. `next/font` pobiera font Geist podczas budowania, więc pierwszy build wymaga dostępu do Google Fonts.
+The project does not require API keys or environment variables. `next/font` downloads the Geist font during the build, so the first build requires access to Google Fonts.
